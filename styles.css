@@ -8,3 +8,21 @@ body {
 .graph-container {
   border: 3px solid black;
 }
+
+.clear-button {
+  position: fixed;
+  left: 16px;
+  bottom: 16px;
+  padding: 10px 14px;
+  background: #20a0a0;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.clear-button:hover {
+  background: #1a8c8c;
+}
