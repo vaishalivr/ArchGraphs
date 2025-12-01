@@ -12,7 +12,9 @@ import {
 const shuffledImages =
   baseConfig.selectionImagesList?.slice().sort(() => Math.random() - 0.5) || [];
 
-const gutter = baseConfig.cellSize * (baseConfig.gutterCells || 0);
+//const gutter = baseConfig.cellSize * (baseConfig.gutterCells || 0);
+const gutter = (1 / 6) * window.innerWidth;
+document.documentElement.style.setProperty("--drawer-width", `${gutter}px`);
 const dimensions = computeGridDimensions(baseConfig.cellSize, gutter);
 const gridConfig = {
   ...baseConfig,
@@ -72,10 +74,35 @@ const drag = buildDragBehavior({
     showClearButton();
     addLogEntry(href);
   },
+  onPointerMove: (x, y) => {
+    if (customCursor) {
+      customCursor.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
+    }
+  },
 });
 
 svg.call(drag);
 buildGrid({ svg, config: gridConfig, state });
+
+const customCursor = document.querySelector(".custom-cursor");
+if (customCursor) {
+  customCursor.style.display = "none";
+  const svgEl = document.querySelector("svg.playing-graph");
+  if (svgEl) {
+    svgEl.addEventListener("mouseenter", () => {
+      console.log("mouse entered");
+      customCursor.style.display = "flex";
+    });
+    svgEl.addEventListener("mouseleave", () => {
+      console.log("mouse left");
+      customCursor.style.display = "none";
+    });
+    svgEl.addEventListener("mousemove", (e) => {
+      console.log("mouse moved");
+      customCursor.style.transform = `translate(${e.clientX}px, ${e.clientY}px) translate(-50%, -50%)`;
+    });
+  }
+}
 
 if (clearButton) {
   clearButton.style.display = "none";

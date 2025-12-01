@@ -52,14 +52,16 @@ export function renderSelections({ selectionsLayer, selections, hoverStroke }) {
       return g;
     });
 
-  sel.select("image")
+  sel
+    .select("image")
     .attr("href", (d) => d.href || "")
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
     .attr("width", (d) => d.width)
     .attr("height", (d) => d.height);
 
-  sel.select("rect.selection-outline")
+  sel
+    .select("rect.selection-outline")
     .attr("x", (d) => d.x)
     .attr("y", (d) => d.y)
     .attr("width", (d) => d.width)
@@ -78,17 +80,20 @@ export function buildDragBehavior({
   clampToGrid,
   renderSelections: renderSelectionsFn,
   onSelectionComplete,
+  onPointerMove,
 }) {
-  const { cellSize, cols, rows, gutter = 0 } = config;
+  const { cellSize, cols, rows } = config;
 
   return d3
     .drag()
     .on("start", (event) => {
+      if (onPointerMove && event.sourceEvent) {
+        onPointerMove(event.sourceEvent.clientX, event.sourceEvent.clientY);
+      }
       state.dragStart = clampToGrid(event.x, event.y, {
         cellSize,
         cols,
         rows,
-        gutter,
       });
       state.selectedRange = null;
       state.currentHref = getNextImageHref(state, config);
@@ -100,19 +105,21 @@ export function buildDragBehavior({
         .attr("height", 0);
     })
     .on("drag", (event) => {
+      if (onPointerMove && event.sourceEvent) {
+        onPointerMove(event.sourceEvent.clientX, event.sourceEvent.clientY);
+      }
       if (!state.dragStart) return;
       const dragEnd = clampToGrid(event.x, event.y, {
         cellSize,
         cols,
         rows,
-        gutter,
       });
       const minCol = Math.min(state.dragStart.col, dragEnd.col);
       const maxCol = Math.max(state.dragStart.col, dragEnd.col);
       const minRow = Math.min(state.dragStart.row, dragEnd.row);
       const maxRow = Math.max(state.dragStart.row, dragEnd.row);
 
-      const x = gutter + minCol * cellSize;
+      const x = minCol * cellSize;
       const y = minRow * cellSize;
       const width = (maxCol - minCol + 1) * cellSize;
       const height = (maxRow - minRow + 1) * cellSize;
@@ -135,7 +142,6 @@ export function buildDragBehavior({
           cellSize,
           cols,
           rows,
-          gutter,
         });
         state.selectedRange = {
           minCol: Math.min(state.dragStart.col, dragEnd.col),
@@ -144,7 +150,7 @@ export function buildDragBehavior({
           maxRow: Math.max(state.dragStart.row, dragEnd.row),
         };
 
-        const x = gutter + state.selectedRange.minCol * cellSize;
+        const x = state.selectedRange.minCol * cellSize;
         const y = state.selectedRange.minRow * cellSize;
         const width =
           (state.selectedRange.maxCol - state.selectedRange.minCol + 1) *
