@@ -3,11 +3,12 @@ export const config = {
   baseFill: "white",
   baseStroke: "#e9ecef",
   hoverStroke: "#adb5bd",
+  gutterCells: 6,
   selectionImagesList: [
-    "house-1.png",
-    "house-2.png",
-    "house-3.png",
-    "house-4.png",
-    "house-5.png",
+    "image-1.png",
+    "image-2.png",
+    "image-3.png",
+    "image-4.png",
+    "image-5.png",
   ],
 };
