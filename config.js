@@ -3,7 +3,6 @@ export const config = {
   baseFill: "white",
   baseStroke: "#e9ecef",
   hoverStroke: "#adb5bd",
-  gutterCells: 6,
   selectionImagesList: [
     "image-1.png",
     "image-2.png",

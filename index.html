@@ -8,14 +8,22 @@
     <script src="https://d3js.org/d3.v7.min.js"></script>
   </head>
   <body>
-    <aside class="drawer">
-      <div class="log-container"></div>
-    </aside>
-    <div class="graph-container">
-      <svg
-        class="playing-graph"
-        style="width: 100vw; height: 100vh; display: block"
-      ></svg>
+    <div class="main-container" style="display: flex">
+      <div class="drawer" style="border: 3px solid red">
+        <div class="log-container"></div>
+      </div>
+
+      <div class="graph-container" style="border: 3px solid black">
+        <svg
+          class="playing-graph"
+          style="width: 100vw; height: 100vh; display: block"
+        ></svg>
+
+        <div class="custom-cursor">
+          <div class="dot">DRAG</div>
+          <div class="label"></div>
+        </div>
+      </div>
     </div>
 
     <button class="clear-button" type="button">Clear</button>

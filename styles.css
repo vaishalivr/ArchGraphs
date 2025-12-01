@@ -6,33 +6,29 @@ body {
 }
 
 .drawer {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 180px;
+  flex: 0 0 var(--drawer-width, 180px); 
   height: 100vh;
   background: #f8f9fa;
   border-right: 1px solid #e0e0e0;
   box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
-  padding: 0;
-  box-sizing: border-box;
   overflow-y: auto;
 }
 
-.drawer-title {
-  display: none;
+.graph-container {
+  flex: 1; 
+  z-index: 100;
 }
 
 .log-container {
   display: flex;
   flex-direction: column;
-  padding: 0;
+  z-index: 100;
 }
 
 .log-entry {
   font-size: 13px;
   color: #444;
-  height: 30px;
+  height: 30px; /*cell size hard coded - to be removed*/
   display: flex;
   align-items: center;
   padding: 0 8px;
@@ -55,4 +51,25 @@ body {
 
 .clear-button:hover {
   background: #1a8c8c;
+}
+
+.playing-graph {
+  cursor: none;
+}
+
+.custom-cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  z-index: 1000;
+  display: none;
+  transform: translate(-50%, -50%);
+}
+
+.dot {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: teal;
 }
