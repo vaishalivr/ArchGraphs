@@ -9,8 +9,17 @@ import {
   buildDragBehavior,
 } from "./selection.js";
 
-const dimensions = computeGridDimensions(baseConfig.cellSize);
-const gridConfig = { ...baseConfig, ...dimensions };
+const shuffledImages =
+  baseConfig.selectionImagesList?.slice().sort(() => Math.random() - 0.5) || [];
+
+const gutter = baseConfig.cellSize * (baseConfig.gutterCells || 0);
+const dimensions = computeGridDimensions(baseConfig.cellSize, gutter);
+const gridConfig = {
+  ...baseConfig,
+  selectionImagesList: shuffledImages,
+  ...dimensions,
+  gutter,
+};
 
 const svg = d3.select("svg.playing-graph");
 const selectionsLayer = createSelectionsLayer(svg);
@@ -40,6 +49,16 @@ const showClearButton = () => {
   if (clearButton) clearButton.style.display = "inline-block";
 };
 
+const logContainer = document.querySelector(".log-container");
+const addLogEntry = (href) => {
+  if (!logContainer) return;
+  const name = href ? href.split("/").pop() : "unknown";
+  const entry = document.createElement("div");
+  entry.className = "log-entry";
+  entry.textContent = name;
+  logContainer.appendChild(entry);
+};
+
 const drag = buildDragBehavior({
   svg,
   selection,
@@ -49,7 +68,10 @@ const drag = buildDragBehavior({
   config: gridConfig,
   clampToGrid,
   renderSelections: renderSelectionsBound,
-  onSelectionComplete: showClearButton,
+  onSelectionComplete: (href) => {
+    showClearButton();
+    addLogEntry(href);
+  },
 });
 
 svg.call(drag);
@@ -64,6 +86,7 @@ if (clearButton) {
     selection.attr("width", 0).attr("height", 0);
     selectionImage.attr("width", 0).attr("height", 0);
     svg.selectAll("rect.grid").attr("stroke", gridConfig.baseStroke);
+    if (logContainer) logContainer.innerHTML = "";
     clearButton.style.display = "none";
   });
 }

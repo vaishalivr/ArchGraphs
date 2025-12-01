@@ -5,10 +5,40 @@ body {
   margin: 0;
 }
 
-.graph-container {
-  border: 3px solid black;
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 180px;
+  height: 100vh;
+  background: #f8f9fa;
+  border-right: 1px solid #e0e0e0;
+  box-shadow: 2px 0 6px rgba(0, 0, 0, 0.08);
+  padding: 0;
+  box-sizing: border-box;
+  overflow-y: auto;
 }
 
+.drawer-title {
+  display: none;
+}
+
+.log-container {
+  display: flex;
+  flex-direction: column;
+  padding: 0;
+}
+
+.log-entry {
+  font-size: 13px;
+  color: #444;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 0 8px;
+  box-sizing: border-box;
+  border-bottom: 1px solid #e0e0e0;
+}
 .clear-button {
   position: fixed;
   right: 16px;

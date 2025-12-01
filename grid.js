@@ -1,7 +1,12 @@
 export function buildGrid({ svg, config, state }) {
-  const { cols, rows, cellSize, baseFill, baseStroke } = config;
+  const { cols, rows, cellSize, baseFill, baseStroke, gutter = 0 } = config;
 
-  svg
+  const gridLayer = svg
+    .append("g")
+    .attr("class", "grid-layer")
+    .attr("transform", `translate(${gutter},0)`);
+
+  gridLayer
     .selectAll("rect.grid")
     .data(
       Array.from({ length: rows * cols }, (_, i) => ({
