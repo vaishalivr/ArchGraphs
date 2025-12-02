@@ -12,7 +12,6 @@ import {
 const shuffledImages =
   baseConfig.selectionImagesList?.slice().sort(() => Math.random() - 0.5) || [];
 
-//const gutter = baseConfig.cellSize * (baseConfig.gutterCells || 0);
 const gutter = (1 / 6) * window.innerWidth;
 document.documentElement.style.setProperty("--drawer-width", `${gutter}px`);
 const dimensions = computeGridDimensions(baseConfig.cellSize, gutter);

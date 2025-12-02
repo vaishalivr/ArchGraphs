@@ -5,6 +5,10 @@ body {
   margin: 0;
 }
 
+:root {
+  --font-size: 12px;
+}
+
 .drawer {
   flex: 0 0 var(--drawer-width, 180px); 
   height: 100vh;
@@ -26,7 +30,7 @@ body {
 }
 
 .log-entry {
-  font-size: 13px;
+  font-size: var(--font-size);
   color: #444;
   height: 30px; /*cell size hard coded - to be removed*/
   display: flex;
@@ -37,21 +41,16 @@ body {
 }
 .clear-button {
   position: fixed;
-  right: 16px;
+  left: 16px;
   bottom: 16px;
   padding: 10px 14px;
-  background: #20a0a0;
-  color: white;
-  border: none;
+  color: black;
+  border: 1px solid black;
   border-radius: 6px;
-  font-size: 14px;
+  font-size: var(--font-size);
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
   z-index: 200;
-}
-
-.clear-button:hover {
-  background: #1a8c8c;
 }
 
 .playing-graph {
@@ -64,13 +63,32 @@ body {
   left: 0;
   pointer-events: none;
   z-index: 1000;
-  display: none;
+  display: none; /* toggled in JS */
   transform: translate(-50%, -50%);
+  width: 6rem;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .dot {
-  width: 1.5rem;
-  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  font-weight: 300;
+  width: 5rem;
+  height: 5rem;
   border-radius: 50%;
-  background: teal;
+  background: none;
+  border: 1px solid black;
+}
+
+.label {
+  margin-top: 0.35rem;
+  color: black;
+  font-size: var(--font-size);
+  font-weight: 300;
+  pointer-events: none;
 }
