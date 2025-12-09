@@ -1,6 +1,5 @@
 import { readable } from "svelte/store";
 
-// Centralized UI/config values you can expand as you wire features.
 export const uiConfig = readable({
   cellSize: 30,
   drawerWidth: 180,
