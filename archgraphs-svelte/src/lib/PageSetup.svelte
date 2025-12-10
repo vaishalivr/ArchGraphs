@@ -1,16 +1,32 @@
+<script>
+  let activePage = "drawing board"; //about | projects | drawing board
+</script>
+
 <div class="page-border">
   <div class="page-split">
     <div class="side left">
-      <div style="border: 1px solid red;">landing container</div>
+      {#if activePage === "about"}
+        <div>about page</div>
+      {:else if activePage === "projects"}
+        <div>projects page</div>
+      {:else if activePage === "drawing board"}
+        <div>default + drawing board page</div>
+      {/if}
     </div>
     <div class="side right">
       <div class="top-right-panel">
-        <div class="company-name" style="cursor: pointer;">
-          FRANK LLOYD WRIGHT
-        </div>
-        <div class="nav-button">about</div>
-        <div>projects</div>
-        <div>contact</div>
+        <div class="company-name">FRANK LLOYD WRIGHT</div>
+        <button class="nav-button" on:click={() => (activePage = "about")}
+          >about</button
+        >
+        <button class="nav-button" on:click={() => (activePage = "projects")}
+          >projects</button
+        >
+
+        <button
+          class="nav-button"
+          on:click={() => (activePage = "drawing board")}>drawing board</button
+        >
       </div>
     </div>
   </div>
@@ -23,15 +39,7 @@
     border: 1px solid #000;
     box-sizing: border-box;
     position: fixed;
-    inset: 0;
-  }
-
-  .page-border::after {
-    inset: 30px;
-    content: "";
-    position: absolute;
-    box-sizing: border-box;
-    pointer-events: none; /* avoid blocking pointer styles/clicks below */
+    outline-offset: -30px;
   }
 
   .page-split {
@@ -57,10 +65,10 @@
     width: 100%;
   }
   .company-name {
-    border: 1px solid blue;
+    border-bottom: 1px solid black;
     text-align: center;
     font-family: Josefin Sans;
-    font-weight: 700;
+    font-weight: 900;
     font-size: 18px;
     letter-spacing: 2px;
     padding: 6px;
@@ -68,5 +76,11 @@
   }
   .nav-button {
     cursor: pointer;
+    font-size: 16px;
+    font-family: Josefin Sans;
+    text-align: left;
+    padding: 10px;
+    background-color: transparent;
+    border: none;
   }
 </style>
