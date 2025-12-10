@@ -2,7 +2,6 @@ import { readable } from "svelte/store";
 
 export const uiConfig = readable({
   cellSize: 30,
-  drawerWidth: 180,
   hoverStroke: "#adb5bd",
   baseStroke: "#e9ecef",
   baseFill: "#ffffff",
