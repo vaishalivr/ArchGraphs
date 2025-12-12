@@ -1,6 +1,9 @@
 import { readable, writable } from "svelte/store";
 
-export const activePage = readable("drawing board");
+export const activePage = writable("drawing board"); //about | projects | drawing board
+export const setActivePage = (page) => {
+  activePage.set(page);
+};
 
 export const hoveredDetails = writable({
   name: "",
@@ -8,6 +11,9 @@ export const hoveredDetails = writable({
   client: "",
   title: "",
 });
+export const setHoveredDetails = (details) => {
+  hoveredDetails.set(details);
+};
 
 export const uiConfig = readable({
   cellSize: 30,

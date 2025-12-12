@@ -3,16 +3,10 @@
   import Projects from "./Projects.svelte";
   import DrawingBoard from "./DrawingBoard.svelte";
   import RightSidePanel from "./RightSidePanel.svelte";
+  import { activePage, setActivePage } from "../stores.js";
 
   const cursorSVG =
     "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='60'><circle cx='25' cy='25' r='24' fill='none' stroke='black' stroke-width='1'/><text x='25' y='30' font-size='15' text-anchor='middle'>+</text><text x='25' y='60' font-family='Montserrat, sans-serif' font-size='9' text-anchor='middle'>DRAG</text></svg>";
-
-  let activePage = "drawing board"; //about | projects | drawing board
-  let hoveredImage = null;
-  let hoveredProjectname = "";
-  let hoveredProjectAddress = "";
-  let hoveredClientName = "";
-  let hoveredDrawingTitle = "";
 </script>
 
 <div class="page-border">
@@ -20,40 +14,21 @@
     <div
       class="side left"
       class:drawing-cursor={activePage === "drawing board"}
-      style:cursor={activePage === "drawing board"
+      style:cursor={$activePage === "drawing board"
         ? `url("${cursorSVG}") 25 25, auto`
         : "auto"}
     >
-      {#if activePage === "about"}
+      {#if $activePage === "about"}
         <About />
-      {:else if activePage === "projects"}
+      {:else if $activePage === "projects"}
         <Projects />
-      {:else if activePage === "drawing board"}
+      {:else if $activePage === "drawing board"}
         <DrawingBoard />
       {/if}
     </div>
 
     <div class="side right">
       <RightSidePanel />
-      <div class="top-right-panel">
-        <div class="company-name">FRANK LLOYD WRIGHT</div>
-        <button class="nav-button" on:click={() => (activePage = "about")}
-          >about</button
-        >
-        <button class="nav-button" on:click={() => (activePage = "projects")}
-          >projects</button
-        >
-        <button
-          class="nav-button"
-          on:click={() => (activePage = "drawing board")}>drawing board</button
-        >
-      </div>
-      <div class="bottom-right-panel">
-        <p class="project-details">Project Name: {hoveredProjectname}</p>
-        <p class="project-details">Project Address: {hoveredProjectAddress}</p>
-        <p class="project-details">Client Name: {hoveredClientName}</p>
-        <p class="project-details">Drawing Title: {hoveredDrawingTitle}</p>
-      </div>
     </div>
   </div>
 </div>
@@ -87,12 +62,12 @@
     justify-content: space-between; /* spread top/bottom panels to edges */
     flex-direction: column;
   }
-  .top-right-panel {
+  /* .top-right-panel {
     display: flex;
     flex-direction: column;
     width: 100%;
-  }
-  .company-name {
+  } */
+  /* .company-name {
     border-bottom: 1px solid black;
     text-align: center;
     font-family: Josefin Sans;
@@ -101,8 +76,8 @@
     letter-spacing: 2px;
     padding: 6px;
     padding-bottom: 10px;
-  }
-  .nav-button {
+  } */
+  /* .nav-button {
     cursor: pointer;
     font-size: 16px;
     font-family: Josefin Sans;
@@ -115,5 +90,5 @@
     border-top: 1px solid black;
     font-family: Josefin Sans;
     padding: 12px;
-  }
+  } */
 </style>
