@@ -1,4 +1,13 @@
-import { readable } from "svelte/store";
+import { readable, writable } from "svelte/store";
+
+export const activePage = readable("drawing board");
+
+export const hoveredDetails = writable({
+  name: "",
+  address: "",
+  client: "",
+  title: "",
+});
 
 export const uiConfig = readable({
   cellSize: 30,

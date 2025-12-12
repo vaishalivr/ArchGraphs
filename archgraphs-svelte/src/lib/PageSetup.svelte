@@ -1,37 +1,40 @@
 <script>
+  import About from "./About.svelte";
+  import Projects from "./Projects.svelte";
+  import DrawingBoard from "./DrawingBoard.svelte";
+  import RightSidePanel from "./RightSidePanel.svelte";
+
+  const cursorSVG =
+    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='60'><circle cx='25' cy='25' r='24' fill='none' stroke='black' stroke-width='1'/><text x='25' y='30' font-size='15' text-anchor='middle'>+</text><text x='25' y='60' font-family='Montserrat, sans-serif' font-size='9' text-anchor='middle'>DRAG</text></svg>";
+
   let activePage = "drawing board"; //about | projects | drawing board
+  let hoveredImage = null;
+  let hoveredProjectname = "";
+  let hoveredProjectAddress = "";
+  let hoveredClientName = "";
+  let hoveredDrawingTitle = "";
 </script>
 
 <div class="page-border">
   <div class="page-split">
-    <div class="side left">
+    <div
+      class="side left"
+      class:drawing-cursor={activePage === "drawing board"}
+      style:cursor={activePage === "drawing board"
+        ? `url("${cursorSVG}") 25 25, auto`
+        : "auto"}
+    >
       {#if activePage === "about"}
-        <div>
-          Frank Lloyd Wright (1867–1959) was an American architect known for
-          “organic architecture,” designing buildings that harmonize with their
-          surroundings. Over a 70-year career, he created more than 1,000
-          structures, including Fallingwater, the Guggenheim Museum, and the
-          Prairie-style homes that emphasized open plans and horizontal lines.
-        </div>
+        <About />
       {:else if activePage === "projects"}
-        <div>
-          <p>Fallingwater (Mill Run, PA)</p>
-          <p>Solomon R. Guggenheim Museum (New York, NY)</p>
-          <p>Robie House (Chicago, IL)</p>
-          <p>Taliesin (Spring Green, WI)</p>
-          <p>Taliesin West (Scottsdale, AZ)</p>
-          <p>Unity Temple (Oak Park, IL)</p>
-          <p>Hollyhock House (Los Angeles, CA)</p>
-          <p>Johnson Wax Headquarters &amp; Research Tower (Racine, WI)</p>
-          <p>Imperial Hotel (Tokyo, Japan – demolished)</p>
-          <p>Marin County Civic Center (San Rafael, CA)</p>
-        </div>
+        <Projects />
       {:else if activePage === "drawing board"}
-        <div>default + drawing board page</div>
+        <DrawingBoard />
       {/if}
     </div>
 
     <div class="side right">
+      <RightSidePanel />
       <div class="top-right-panel">
         <div class="company-name">FRANK LLOYD WRIGHT</div>
         <button class="nav-button" on:click={() => (activePage = "about")}
@@ -46,11 +49,10 @@
         >
       </div>
       <div class="bottom-right-panel">
-        <p class="project-details">Project Name:</p>
-        <p class="project-details">Project Address:</p>
-        <p class="project-details">Client Name:</p>
-        <p class="project-details">Drawing Title:</p>
-        <p class="project-details">Scale:</p>
+        <p class="project-details">Project Name: {hoveredProjectname}</p>
+        <p class="project-details">Project Address: {hoveredProjectAddress}</p>
+        <p class="project-details">Client Name: {hoveredClientName}</p>
+        <p class="project-details">Drawing Title: {hoveredDrawingTitle}</p>
       </div>
     </div>
   </div>
