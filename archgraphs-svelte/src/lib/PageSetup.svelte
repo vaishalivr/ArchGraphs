@@ -52,7 +52,7 @@
   .side {
     display: flex;
     width: 50%;
-    border: 1px solid red;
+    border: 1px solid black;
   }
   .left {
     flex: 5;
@@ -62,33 +62,4 @@
     justify-content: space-between; /* spread top/bottom panels to edges */
     flex-direction: column;
   }
-  /* .top-right-panel {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-  } */
-  /* .company-name {
-    border-bottom: 1px solid black;
-    text-align: center;
-    font-family: Josefin Sans;
-    font-weight: 900;
-    font-size: 18px;
-    letter-spacing: 2px;
-    padding: 6px;
-    padding-bottom: 10px;
-  } */
-  /* .nav-button {
-    cursor: pointer;
-    font-size: 16px;
-    font-family: Josefin Sans;
-    text-align: left;
-    padding: 10px;
-    background-color: transparent;
-    border: none;
-  }
-  .project-details {
-    border-top: 1px solid black;
-    font-family: Josefin Sans;
-    padding: 12px;
-  } */
 </style>

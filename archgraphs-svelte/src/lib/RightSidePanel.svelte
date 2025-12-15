@@ -45,14 +45,17 @@
     width: 100%;
   }
   #company-name {
-    border-bottom: 1px solid black;
+    background-color: #cc3d33;
+    min-height: 60px;
+    display: flex;
+    color: white;
+    align-items: center;
     text-align: center;
+    justify-content: center;
     font-family: Josefin Sans;
     font-weight: 900;
     font-size: 18px;
-    letter-spacing: 2px;
-    padding: 6px;
-    padding-bottom: 10px;
+    letter-spacing: 0.1em;
   }
   .nav-button {
     cursor: pointer;
