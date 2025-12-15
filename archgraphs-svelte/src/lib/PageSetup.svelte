@@ -35,9 +35,9 @@
 
 <style>
   .page-border {
-    width: 99.9vw;
-    height: 99.9vh;
-    border: 1px solid #000;
+    width: 100vw;
+    height: 100vh;
+    /* border: 1px solid red; */
     box-sizing: border-box;
     position: fixed;
     outline-offset: -30px;
