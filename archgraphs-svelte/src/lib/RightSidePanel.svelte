@@ -1,9 +1,25 @@
 <script>
   import { activePage, setActivePage, hoveredDetails } from "../stores.js";
+  import { onMount } from "svelte";
+  const companyName = "FRANK LLOYD WRIGHT";
+  const typingSpeed = 450; // milliseconds per character
+  let i = 0;
+  let companyEl;
+
+  onMount(() => {
+    const typeWriter = () => {
+      if (i < companyName.length) {
+        companyEl.innerHTML += companyName.charAt(i);
+        i++;
+        setTimeout(typeWriter, typingSpeed);
+      }
+    };
+    typeWriter();
+  });
 </script>
 
 <div class="top-right-panel">
-  <div class="company-name">FRANK LLOYD WRIGHT</div>
+  <div id="company-name" bind:this={companyEl}></div>
   <button class="nav-button" on:click={() => setActivePage("about")}
     >about</button
   >
@@ -28,7 +44,7 @@
     flex-direction: column;
     width: 100%;
   }
-  .company-name {
+  #company-name {
     border-bottom: 1px solid black;
     text-align: center;
     font-family: Josefin Sans;
