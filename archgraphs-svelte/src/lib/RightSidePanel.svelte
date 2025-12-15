@@ -1,5 +1,11 @@
 <script>
-  import { activePage, setActivePage, hoveredDetails } from "../stores.js";
+  import {
+    activePage,
+    setActivePage,
+    hoveredDetails,
+    clearRectangles,
+  } from "../stores.js";
+
   import { onMount } from "svelte";
   const companyName = "FRANK LLOYD WRIGHT";
   const typingSpeed = 450; // milliseconds per character
@@ -30,6 +36,8 @@
     >drawing board</button
   >
 </div>
+
+<button on:click={clearRectangles}>clear rectangles</button>
 
 <div class="bottom-right-panel">
   <p class="project-details">Project Name: {$hoveredDetails.name}</p>

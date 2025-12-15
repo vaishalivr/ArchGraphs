@@ -15,6 +15,11 @@ export const setHoveredDetails = (details) => {
   hoveredDetails.set(details);
 };
 
+export const imageRectangles = writable([]);
+export const clearRectangles = () => {
+  imageRectangles.set([]);
+};
+
 export const uiConfig = readable({
   cellSize: 30,
   hoverStroke: "#adb5bd",
