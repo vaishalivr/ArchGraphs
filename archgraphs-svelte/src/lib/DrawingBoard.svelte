@@ -1,7 +1,8 @@
 <script>
+  import { imageRectangles } from "../stores.js";
+
   let start = null;
   let end = null;
-  let rectangles = [];
 
   const dragStart = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -16,7 +17,7 @@
 
   const dragEnd = () => {
     if (rect) {
-      rectangles = [...rectangles, rect];
+      imageRectangles.update((recs) => [...recs, rect]);
     }
     start = null;
     end = null;
@@ -43,7 +44,7 @@
     role="button"
     tabindex="0"
   >
-    {#each rectangles as r}<rect
+    {#each $imageRectangles as r}<rect
         x={r.x}
         y={r.y}
         width={r.width}
