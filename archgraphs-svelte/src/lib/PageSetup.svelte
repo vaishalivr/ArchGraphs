@@ -4,9 +4,12 @@
   import DrawingBoard from "./DrawingBoard.svelte";
   import RightSidePanel from "./RightSidePanel.svelte";
   import { activePage, setActivePage } from "../stores.js";
+  import { drawCursorSVG } from "./cursorConfig.js";
 
-  const cursorSVG =
-    "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='60'><circle cx='25' cy='25' r='24' fill='none' stroke='black' stroke-width='1'/><text x='25' y='30' font-size='15' text-anchor='middle'>+</text><text x='25' y='60' font-family='Montserrat, sans-serif' font-size='9' text-anchor='middle'>DRAG</text></svg>";
+  //const drawCursorSVG =
+  //"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='60'><circle cx='25' cy='25' r='24' fill='none' stroke='black' stroke-width='1'/><text x='25' y='30' font-size='15' text-anchor='middle'>+</text><text x='25' y='60' font-family='Montserrat, sans-serif' font-size='9' text-anchor='middle'>DRAW</text></svg>";
+  // const dragCursorSVG =
+  //   "data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='50' height='60'><circle cx='25' cy='25' r='24' fill='none' stroke='black' stroke-width='1'/><text x='25' y='30' font-size='15' text-anchor='middle'>+</text><text x='25' y='60' font-family='Montserrat, sans-serif' font-size='9' text-anchor='middle'>DRAG</text></svg>";
 </script>
 
 <div class="page-border">
@@ -15,7 +18,7 @@
       class="side left"
       class:drawing-cursor={$activePage === "drawing board"}
       style:cursor={$activePage === "drawing board"
-        ? `url("${cursorSVG}") 25 25, auto`
+        ? `url("${drawCursorSVG}") 25 25, auto`
         : "auto"}
     >
       {#if $activePage === "about"}
