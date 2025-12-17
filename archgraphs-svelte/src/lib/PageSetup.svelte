@@ -13,7 +13,7 @@
   <div class="page-split">
     <div
       class="side left"
-      class:drawing-cursor={activePage === "drawing board"}
+      class:drawing-cursor={$activePage === "drawing board"}
       style:cursor={$activePage === "drawing board"
         ? `url("${cursorSVG}") 25 25, auto`
         : "auto"}

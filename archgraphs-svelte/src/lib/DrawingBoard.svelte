@@ -3,6 +3,7 @@
 
   let start = null;
   let end = null;
+  let circlePadding = 15;
 
   const dragStart = (event) => {
     const rect = event.currentTarget.getBoundingClientRect();
@@ -21,6 +22,21 @@
     }
     start = null;
     end = null;
+  };
+
+  const removeRectangle = (rect) => {
+    imageRectangles.update((recs) => recs.filter((rec) => rec !== rect));
+  };
+
+  const handleDeleteKey = (event, rect) => {
+    if (
+      event.key === "Enter" ||
+      event.key === " " ||
+      event.key === "Spacebar"
+    ) {
+      event.preventDefault();
+      removeRectangle(rect);
+    }
   };
 
   $: rect =
@@ -44,15 +60,31 @@
     role="button"
     tabindex="0"
   >
-    {#each $imageRectangles as r}<rect
-        x={r.x}
-        y={r.y}
-        width={r.width}
-        height={r.height}
-        stroke="black"
-        stroke-width="2"
-        fill="transparent"
-      />{/each}
+    {#each $imageRectangles as r}
+      <g>
+        <rect
+          x={r.x}
+          y={r.y}
+          width={r.width}
+          height={r.height}
+          stroke="black"
+          stroke-width="2"
+          fill="transparent"
+        />
+        <circle
+          cx={r.x + r.width - circlePadding}
+          cy={r.y + circlePadding}
+          r="9"
+          fill="red"
+          cursor="pointer"
+          role="button"
+          tabindex="0"
+          on:click={() => removeRectangle(r)}
+          on:keydown={(event) => handleDeleteKey(event, r)}
+        />
+      </g>
+    {/each}
+
     {#if rect}<rect
         x={rect.x}
         y={rect.y}
@@ -61,6 +93,13 @@
         stroke="black"
         stroke-width="2"
         fill="transparent"
-      />{/if}
+      />
+    {/if}
   </svg>
 </div>
+
+<style>
+  *:focus {
+    outline: none;
+  }
+</style>
